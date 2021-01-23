@@ -14,3 +14,8 @@
 | non-virtual 函数 | 你不希望派生类重新定义（override, 重写）它。 | `void function();` |  |
 | virtual 函数 | 你希望派生类重新定义（override, 重写）它，且你对它已有默认定义。 | `virtual void function();` |  |
 | pure virtual 函数 | 你希望派生类一定要重新定义（override, 重写）它，你对它没有默认定义。 | `virtual void function() = 0;` | 在声明语句的分号之前书写=0 |
+
+### overload override overwrite
+| overload 重载 | override 覆盖 | overwrite 重写 |
+| :---- | :---- | :---- |
+| 同一个类中, 函数名字相同但形参列表不同 | 派生类重写了基类的同名同参 virtual 函数 | 派生类重写了基类同名非 virtual 函数 |
