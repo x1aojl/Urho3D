@@ -2,8 +2,25 @@
 
 ## C++ 知识点梳理
 
+### 访问控制
+#### class / struct 里成员的默认访问控制
+定义在第一个访问说明符之前的成员：class 中默认为 private，struct 中默认为 public。
+| <sub>类型</sub> \ <sup>成员访问说明符</sup> | public | protected | private |
+| :---- | :----: | :----: | :----: |
+| 类的实例 | yes  | no | no |
+| 类的友元 | yes | yes | yes |
+| 类的派生类 | yes | yes | no |
+
+#### class / struct 继承链里的默认访问控制
+如果不写继承方式：class 默认以 private 的方式继承，struct 默认以 public 的方式继承。
+| <sub>继承方式</sub> \ <sup>基类成员</sup> | public | protected | private |
+| :---- | :---- | :---- | :---- |
+| public | public  | protected | 不可访问 |
+| protected | protected | protected | 不可访问 |
+| private | private | private | 不可访问 |
+
 ### inline（内联）函数
-|  |  |
+| | |
 | :---- | :---- |
 | 函数在 class body 内定义完成 | 自动成为 inline 候选人。 |
 | 函数在 class body 外定义完成 | 需要在函数返回类型前面显示地加上 inline。 |
