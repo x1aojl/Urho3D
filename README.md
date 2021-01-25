@@ -46,11 +46,11 @@
 ```T* p = new T();```</br>
 编译器转为：
 ```
-// 分配内存 operator new -> allocate -> malloc
-void* memory = operator new(sizeof(T));
-// 类型转换
+// 分配内存 allocate
+void* memory = operator new(sizeof(T)); // -> ::operator new(size_t); -> malloc(size_t);
+// 转换类型 cast
 p = static_cast<T*>(memory);
-// 调用构造函数
+// 调用构造函数 invoke ctor
 p->T::T();
 ```
 
@@ -58,8 +58,8 @@ p->T::T();
 ```delete p;```</br>
 编译器转为：
 ```
-// 调用析构函数
+// 调用析构函数 invoke dtor
 p->~T();
-// 释放内存
-free(p);
+// 释放内存 deallocate
+operator delete(p); // -> ::operator delete(void*); -> free(void*);
 ```
