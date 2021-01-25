@@ -53,3 +53,13 @@ p = static_cast<T*>(memory);
 // 调用构造函数
 p->T::T();
 ```
+
+### delete expression
+```delete p;```</br>
+编译器转为：
+```
+// 调用析构函数
+p->~T();
+// 释放内存
+free(p);
+```
