@@ -42,3 +42,14 @@
 | override | 表示派生类应当覆盖基类中的这个虚函数 | 用于派生类的虚函数中 |
 | final | 阻止类继承或阻止派生类重写这个虚函数 | 用于类或基类的虚函数中 |
 
+### new expression
+```T* p = new T();```</br>
+编译器转为：
+```
+// 分配内存 operator new -> allocate -> malloc
+void* memory = operator new(sizeof(T));
+// 类型转换
+p = static_cast<T*>(memory);
+// 调用构造函数
+p->T::T();
+```
