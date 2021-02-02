@@ -19,6 +19,38 @@
 | protected | protected | protected | 不可访问 |
 | private | private | private | 不可访问 |
 
+### static 关键字
+#### static 修饰内部链接的全局函数 / 变量
+表示该函数 / 变量只在所在的编译单元内可见。与之相关的是外部链接声明，使用 extern 修饰。
+``` 
+static int a = 0; // 内部链接的变量
+static void function() { } // 内部链接的函数
+```
+
+#### static 修饰局部变量
+静态局部变量在程序第一次运行到该声明时做初始化，作用域结束后变量不被销毁，下一次运行时仍保持状态。普通的局部变量称为自动变量。
+```
+int function()
+{
+	static int num = 0;
+	num++;
+	return num;
+}
+```
+
+#### static 修饰成员函数 / 变量
+表示函数 / 变量不绑定至实例。静态变量除了声明外还需要在类之外显示定义。
+```
+class C
+{
+	static void function(); // 静态成员函数声明
+	static int num; // 静态成员变量声明
+};
+
+void C::function() { } // 静态成员函数定义
+int C::num = 0; // 静态成员变量定义
+```
+
 ### inline（内联）函数
 | | |
 | :---- | :---- |
