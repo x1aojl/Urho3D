@@ -51,6 +51,71 @@ void C::function() { } // 静态成员函数定义
 int C::num = 0; // 静态成员变量定义
 ```
 
+### [extern](https://docs.microsoft.com/en-us/cpp/cpp/extern-cpp?view=msvc-160) 关键字
+#### extern 在非 const 全局函数 / 变量声明中
+指定在其他编译单元中定义函数 / 变量。
+```
+//fileA.cpp
+int i = 42; // declaration and definition
+
+//fileB.cpp
+extern int i;  // declaration only. same as i in FileA
+
+//fileC.cpp
+extern int i;  // declaration only. same as i in FileA
+
+//fileD.cpp
+int i = 43; // LNK2005! 'i' already has a definition.
+extern int i = 43; // same error (extern is ignored on definitions)
+```
+
+#### extern 在 const 变量声明中
+指定变量具有外部链接（默认情况下全局常量具有内部链接）。
+```
+//fileA.cpp
+extern const int i = 42; // extern const definition
+
+//fileB.cpp
+extern const int i;  // declaration only. same as i in FileA
+```
+
+#### extern "C" 函数声明
+指定该函数在其他位置定义，并使用C语言调用约定。
+```
+// Declare printf with C linkage.
+extern "C" int printf(const char *fmt, ...);
+
+//  Cause everything in the specified
+//  header files to have C linkage.
+extern "C" {
+    // add your #include statements here
+#include <stdio.h>
+}
+
+//  Declare the two functions ShowChar
+//  and GetChar with C linkage.
+extern "C" {
+    char ShowChar(char ch);
+    char GetChar(void);
+}
+
+//  Define the two functions
+//  ShowChar and GetChar with C linkage.
+extern "C" char ShowChar(char ch) {
+    putchar(ch);
+    return ch;
+}
+
+extern "C" char GetChar(void) {
+    char ch;
+    ch = getchar();
+    return ch;
+}
+
+// Declare a global variable, errno, with C linkage.
+extern "C" int errno;
+```
+
 ### inline（内联）函数
 | | |
 | :---- | :---- |
